@@ -57,22 +57,20 @@ public class Ball extends CollidableObject
         double tempY = other.yVel;
         double weightRatio = weight/other.weight;
         double radii = this.radius + other.radius;
+        double power1 = Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
+        double power2 = Math.sqrt(other.xVel * other.xVel + other.yVel * other.yVel);
         double angle = Math.atan2(y - other.y, x - other.x);
         double velAngle = Math.atan2(tempW, tempV);
         //System.out.println(angle);
-        this.xVel += other.xVel * 1/weightRatio * Math.cos(angle) * 0.7;
-        this.yVel += other.yVel * 1/weightRatio * Math.sin(angle) * 0.7;
-        this.xVel -= tempV * weightRatio * Math.cos(angle) * 0.7;
-        this.yVel -= tempW * weightRatio * Math.sin(angle) * 0.7;
-        other.xVel += tempV * weightRatio * Math.cos(angle) * 0.7;
-        other.yVel += tempW * weightRatio * Math.sin(angle) * 0.7;
-        other.xVel -= tempX * 1/weightRatio * Math.cos(angle) * 0.7;
-        other.yVel -= tempY * 1/weightRatio * Math.sin(angle) * 0.7;
+        this.xVel += power2 * 1/weightRatio * Math.cos(angle) * 0.7;
+        this.yVel += power2 * 1/weightRatio * Math.sin(angle) * 0.7;
+        other.xVel -= power1 * 1/weightRatio * Math.cos(angle) * 0.7;
+        other.yVel -= power1 * 1/weightRatio * Math.sin(angle) * 0.7;
         //Change position
-        this.x = other.x + radii * Math.cos(angle);
+        /*this.x = other.x + radii * Math.cos(angle);
         this.y = other.y + radii * Math.sin(angle);
         other.x = this.x - radii * Math.cos(angle);
-        other.y = this.y - radii * Math.sin(angle);
+        other.y = this.y - radii * Math.sin(angle);*/
         
         
         /* In-dev Version:
